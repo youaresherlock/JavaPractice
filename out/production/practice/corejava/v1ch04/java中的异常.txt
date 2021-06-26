@@ -1,0 +1,12 @@
+// 如果使用一个没有初始化的指针，运行系统将会产生一个NullPointerException
+// Date birthday = null;
+// String s = birthday.toString();
+
+/**
+ * java中的异常
+ * Object -> Throwable -> Error/Exception(RuntimeException, IOException等)
+ * Java规定:
+ * 必须捕获的异常,包括Exception及其子类,但不包括RuntimeException及其子类,这种类型的异常
+ * 称为CheckedException
+ * 不需要捕获的异常,包括Error及其子类,RuntimeException及其子类
+ */

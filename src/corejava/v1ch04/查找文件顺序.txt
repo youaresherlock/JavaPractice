@@ -1,0 +1,51 @@
+javac编译器总是在当前的目录中查找文件.但Java虚拟机仅在类路径(classpath,
+是所有包含类文件的路径的集合)中有"."目录的时候才查看当前目录。
+
+类路径所列出的目录和归档文件是搜索类的起始点
+unix classpath /home/user/classdir:.:/home/user/archives/archive.jar
+
+假定虚拟机要搜寻 com.horstmann.corejava.Employee 类文件。它首先要查看存储在 jre/
+lib 和jre/lib/ext 目录下的归档文件中所存放的系统类文件。显然，在那里找不到相应的类文
+件，然后再查看类路径。然后查找以下文件：
+
+/home/user/classdir/com/horstmann/corejava/Employee.class
+com/horstmann/corejava/Employee.class 从当前目录开始
+com/horstmann/corejava/Employee.class inside /home/user/archives/archive.jar
+
+设置类路径
+1. 最好采用-classpath(或-cp)选项指定类路径
+java -classpath c:\classdir; .;c:\archives\archive.jar MyProg
+2. 设置CLASSPATH环境变量
+linux export CLASSPATH=/home/user/classdir:.:/ home/user/archives/archive.jar
+windows set CLASSPATH=c:\classdir;.;c:\archives\archive.jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

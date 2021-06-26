@@ -1,0 +1,84 @@
+ArrayList<E>(int initialCapacity)
+用指定容量构造一个空数组列表
+boolean add(E obj)
+在数组列表的尾端添加一个元素.永远返回true
+int size()
+返回存储在数组列表中的当前元素
+void set(int index, E obj)
+设置数组列表指定位置的元素值,这个操作将覆盖这个位置的原有内容(index [0, size() - 1]
+E get(int index)
+获得指定位置的元素值(index [0, size() - 1]
+void add(int index, E obj)
+E remove(int index)
+
+ArrayList<Employee> list = new ArrayList<>(100);
+Employee e = staff.get(i); // Java没有运算符重载，不能使用[],必须调用显式的方法
+
+对象包装器与自动装箱
+所有的基本类型都有一个与之对应的类(包装器wrapper)
+Integer/Long/Short/Float/Double/Byte/Character/Void/Boolean
+(前6个类派生于公共的超类Number)
+对象包装器类是不可变的，即一旦构造了包装器，就不允许更改包装在其中的值.
+同时,对象包装类还是final,因此不能定义它们的子类.
+
+尖括号中的类型参数不允许是基本类型.
+ArrayList<Integer> list = new ArrayList<>();
+有一个很有用的特性， 从而更加便于添加 int 类型的元素到 ArrayList<Integer>
+中。下面这个调用
+list.add(3); 将自动地变成list.add(Integer.valueOf(3)),这种变换被称为自动
+装箱(autoboxing)
+
+自动拆箱:
+将一个Integer对象赋值给一个int值时，将会自动地拆箱
+int n = list.get(i); -> int n = list.get(i).intValue();
+甚至在算数表达式中也能够自动地装箱和拆箱
+Integer n = 3;
+n++; // 先拆箱，进行自增计算，最后再将结果装箱
+Integer n = 3;
+System.out.println(n.hashCode()); // 3
+n++;
+System.out.println(n.hashCode()); // 4
+
+自动装箱规范要求 boolean、byte、char 127， 介于 -128 ~ 127 之间的 short 和
+int 被包装到固定的对象中。例如，如果在前面的例子中将 a 和 b 初始化为 100，对它们
+进行比较的结果一定成立。
+Integer a = 100;
+Integer b = 100;
+a == b // true
+
+装箱和拆箱是编译器认可的，而不是虚拟机。编译器在生成类的字节码
+时， 插人必要的方法调用。虚拟机只是执行这些字节码。
+
+
+参数数量可变的方法(Java SE 5.0以后):
+public class PrintStream {
+    // Object...参数类型与Object[]完全一样
+    public PrintStream printf(String fmt, Object... args) {
+        return format(fmt, args);
+    }
+}
+System.out.printf方法接受两个参数，一个是格式字符串，另一个是Object[]数组.(如果调用者
+提供的是整形数组或者其他基本类型的值，自动装箱功能将把它们转换成对象)
+编译器需要对printf的每次调用进行转换,以便将参数绑定到数组上，并且在必要的时候进行自动装箱
+System.out.printf("%d %s", new Object[] {new Integer(n), "widgets"}); // String不会装箱，因为不是基本类型
+
+枚举类
+在比较两个枚举类型(Enum的子类)的值时，永远不需要调用equals,直接使用==
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

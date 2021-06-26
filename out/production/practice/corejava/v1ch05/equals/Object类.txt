@@ -1,0 +1,127 @@
+如果没有明确地指出超类,Object就被认为是这个类的超类
+可以使用Object类型的变量引用任何类型的对象
+在Java中，只有基本类型(primitive types)不是对象
+所有的数组类型，不管是对象数组还是基本类型的数组都扩展了Object类
+
+equals:
+Object类中的equals(return this == )方法用于检测一个对象是否等于另外一个对象(是否具有相同的引用)
+经常需要检测两个对象状态的相等性，如果两个对象的状态相等，就认为这两个对象是相等的
+public boolean equals(Object obj) {
+        return (this == obj);
+    }
+
+Object.getClass() 返回一个对象所属的类
+在子类中定义equals方法时，首先调用超类的equals.如果检测失败，
+对象就不可能相等。如果超类中的域都相等，就需要比较子类中的实例域
+
+Java语言规范要求equals方法具有下面的特性:
+1. 自反性 对于任何非空引用x,x.equals(x)返回true
+2. 对称性 对于任何引用x和y,当且仅当y.equals(x)返回true,x.equals(y)也应该返回true
+3. 传递性
+4. 一致性 如果x和y引用的对象没有发生变化, 反复调用x.equals(y)应返回同样的结果
+5. 对于任意非空引用x,x.equals(null)应该返回false
+
+编写一个完美的equals方法的建议:
+1. 显式参数命名为 otherObject, 稍后需要将它转换成另一个叫做 other 的变量
+2. 检测 this 与 otherObject 是否引用同一个对象
+if (this == otherObject) return true;
+3. 检测 otherObject 是否为 null, 如 果 为 null, 返 回 false。这项检测是很必要的
+if (otherObject == null) return false;
+4. 比较 this 与 otherObject 是否属于同一个类。如果 equals 的语义在每个子类中有所改
+   变，就使用 getClass 检测：
+if (getClass() != otherObject.getClass()) return false;
+如果所有的子类都拥有统一的语义，就使用 instanceof 检测:
+if (!(otherObject instanceof ClassName)) return false;
+5. 将otherObject转换为相应的类类型变量:
+ClassName other = (ClassName)otherObject;
+6. 现在开始对所有需要比较的域进行比较了。使用 =比较基本类型域，使用 equals 比
+   较对象域。如果所有的域都匹配， 就返回 true; 否 则 返 回 false
+Objects.equals:
+public static boolean equals(Object a, Object b) {
+        return (a == b) || (a != null && a.equals(b));
+    }
+return field1 == other.field1 && Objects.equals(field2, other.field2)
+&& ...;
+如果在子类中重新定义 equals, 就要在其中包含调用 super.equals(other)
+
+对于数组类型的域， 可以使用静态的 Arrays.equals 方法检测相应的数组元素是否相等。
+public static boolean equals(int[] a, int[] a2) {
+        if (a==a2)
+            return true;
+        if (a==null || a2==null)
+            return false;
+
+        int length = a.length;
+        if (a2.length != length)
+            return false;
+
+        for (int i=0; i<length; i++)
+            if (a[i] != a2[i])
+                return false;
+
+        return true;
+    }
+
+hashCode方法:
+hashCode方法定义在Object类中，因此每个对象都有一个默认的散列码，其值为对象的存储位置
+public native int hashCode();
+String类的hashCode方法:
+public int hashCode() {
+        int h = hash;
+        if (h == 0 && value.length > 0) {
+            char val[] = value;
+
+            for (int i = 0; i < value.length; i++) {
+            // 字符和整数相加会输出字符ASCII码和整数的运算结果
+            }
+                h = 31 * h + val[i];
+            }
+            hash = h;
+        }
+        return h;
+    }
+
+如果重新定义 equals方法，就必须重新定义 hashCode 方法， 以便用户可以将对象插人
+到散列表中
+
+Objects.hashCode:
+public static int hashCode(Object o) {
+        return o != null ? o.hashCode() : 0;
+    }
+
+Equals 与 hashCode 的定义必须一致
+如果存在数组类型的域， 那么可以使用静态的 Arrays.hashCode 方法计算一个散列码
+这个散列码由数组元素的散列码组成。
+Objects.hash(Object... values) return Arrays.hashCode(values);
+
+
+toString方法:
+用于返回表示对象值的字符串
+
+Object类定义了toString方法,用来打印输出对象所属的类命名和散列码ClassName@hashCode
+
+场景:
+对象与一个字符串通过操作符"+"连接起来,java编译就会自动地调用toString方法，
+以便获得这个对象的字符串描述
+如果x是任意一个对象，并调用System.out.println(x);会直接调用x.toString(),并打印输出得到的字符串.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

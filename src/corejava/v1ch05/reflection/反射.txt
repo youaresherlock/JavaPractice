@@ -1,0 +1,68 @@
+反射(reflective)是指程序运行期间发现更多的类及其属性的能力
+反射机制可以用来:
+在运行时分析类的能力
+在运行时查看对象
+实现通用的数组操作代码
+利用Method对象
+
+调用静态方法forName获得类名对应的Class对象
+String className = "java.util.Random";
+Class c1 = Class.forName(className);
+
+一个Class对象实际上表示的是一个类型，而这个类型未必一定是一种类.
+例如: int不是类,但int.class是一个Class类型的对象
+Class c = Random.class;/int.class/Double[].class
+Class类实际上是一个泛型类,例如Employee.class的类型是Class<Employee>
+
+虚拟机为每个类型管理一个Class对象,因此可以利用==运算符实现两个类对象比较的操作
+动态地创建一个类的实例: e.getClass().newInstance();newInstance方法调用
+默认的构造器初始化新创建的对象
+String s = "java.util.Random";
+Object m = Class.forName(s).newInstance();
+
+// String className = "java.util.Random";
+// Class c1 = Class.forName(className);
+// System.out.println(c1.hashCode());
+// System.out.println(Double[].class.getName());
+// System.out.println(int[].class.getName());
+// System.out.println(Class.class.getName());
+
+异常: 未检查异常和已经查异常(编译器会将检查是否提供了处理器)
+
+反射机制最重要的内容-检查类的结构
+在java.lang.reflect包中有三个类Field、Method和Constructor分别用于
+描述类的域、方法和构造器
+Class类中的getFields、getMethods和getConstructors方法将分别返回类
+提供的public域、方法和构造器数组，其中包括超类的公有成员.
+Class类中的getDeclareFields、getDeclareMethods和getDeclaredConstructors
+方法将分别返回类中声明的全部域、方法和构造器，其中包括私有和受保护成员，但不包括超类的
+成员
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
