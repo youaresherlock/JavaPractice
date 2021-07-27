@@ -16,6 +16,7 @@ public class MyAutoClosable implements Closeable {
      * Scanner类实现java.io.Closeable接口,
      * java.io.Closeable实现了AutoCloseable接口
      */
+    @SuppressWarnings("checkstyle:UncommentedMain")
     public static void main(String[] args) {
         try (MyAutoClosable close = new MyAutoClosable()) {
             close.doIt();

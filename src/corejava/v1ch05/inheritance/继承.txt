@@ -43,12 +43,19 @@ tips:
 
 类即使不含抽象方法,也可以将类声明为抽象类,抽象类不能被实例化,但可以定义一个抽象
 类的对象变量来引用非抽象子类Student的实例
+Person p = new Student("vince Vu", "Economics");
+p是一个抽象类Person的变量,Person引用了一个非抽象子类Student的实例
+
+interface接口的方法默认是public abstract方法
 
 Java用于控制可见性的4个访问修饰符:
 private: 仅对本类可见
 public: 对所有类可见
 protected: 对本包和所有子类可见
 default: 默认，对本包可见
+private和protected不能修饰类，private修饰类这个类就不能被其他类使用，
+没有了意义，protected修饰类，为了在其它包中使用这个类，就必须实现这个类的
+子类，但是能够引用到这个类，又必须能够可以访问该类，因此矛盾
 
 构造方法是一个类独有的方法，不会被它的子类继承，但是子类在实例化对象时:
 如果子类的构造器没有显示的调用父类的构造器，则会自动调用父类默认的构造器(无参).

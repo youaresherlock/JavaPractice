@@ -8,6 +8,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
 import java.util.Scanner;
 
 public class ReflectionTest {
@@ -125,16 +126,34 @@ public class ReflectionTest {
         Field[] fields = c1.getDeclaredFields();
 
         for (Field f: fields) {
-            Class type = f.getType();
+            Type type = f.getType();
             String name = f.getName();
             System.out.print("  ");
             String modifiers = Modifier.toString(f.getModifiers());
             if (modifiers.length() > 0) {
                 System.out.print(modifiers + " ");
             }
-            System.out.println(type.getName() + " " + name + ";");
+            System.out.println(type.getTypeName() + " " + name + ";");
         }
     }
+
+    /**
+     * 由于Class<T> implements Type,所以可以将f.getType()返回给Type
+     * public static void printFields(Class c1) {
+     *         Field[] fields = c1.getDeclaredFields();
+     *
+     *         for (Field f: fields) {
+     *             Class type = f.getType();
+     *             String name = f.getName();
+     *             System.out.print("  ");
+     *             String modifiers = Modifier.toString(f.getModifiers());
+     *             if (modifiers.length() > 0) {
+     *                 System.out.print(modifiers + " ");
+     *             }
+     *             System.out.println(type.getName() + " " + name + ";");
+     *         }
+     *     }
+     */
 }
 
 
